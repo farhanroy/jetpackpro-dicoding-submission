@@ -1,6 +1,8 @@
 plugins {
     id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
+    id(BuildPlugins.daggerHilt)
+    kotlin(BuildPlugins.kotlinKapt)
 }
 
 android {
@@ -38,8 +40,15 @@ dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)
-    implementation(Libraries.material)
-    implementation(Libraries.constraintLayout)
+
+    // Dagger
+    implementation(Libraries.hiltAndroid)
+    kapt(Libraries.hiltAndroidCompiler)
+
+    //retrofit
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitConverter)
+    implementation(Libraries.loggingInterceptor)
 
     testImplementation (TestLibraries.junit4)
     androidTestImplementation (TestLibraries.testRunner)

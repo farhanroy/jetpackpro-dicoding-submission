@@ -35,6 +35,8 @@ object Libraries {
         const val ktx = "1.3.2"
         const val androidLegacy = "1.0.0"
         const val navigation = "2.3.5"
+        const val retrofit = "2.9.0"
+        const val loggingInterceptor = "4.9.1"
         const val hiltVersion = "2.28-alpha"
     }
 
@@ -47,6 +49,10 @@ object Libraries {
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
 
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
