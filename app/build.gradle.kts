@@ -38,13 +38,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    dynamicFeatures = mutableSetOf(":home")
 }
 
 
 dependencies {
 
     implementation(project(":core"))
+
     implementation(Libraries.kotlinStdLib)
 
     implementation(Libraries.appCompat)

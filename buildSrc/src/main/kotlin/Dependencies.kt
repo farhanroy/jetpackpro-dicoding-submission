@@ -13,10 +13,17 @@ object BuildPlugins {
 
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
+    const val dynamicFeatureModule = "com.android.dynamic-feature"
     const val kotlinAndroid = "kotlin-android"
     const val kotlinKapt = "kapt"
     const val daggerHilt = "dagger.hilt.android.plugin"
 
+}
+
+
+object App {
+    const val BASE_URL = "https://api.themoviedb.org/3/"
+    const val API_KEY = "b7b05feb9ff822bf88dbb160c0050c8e"
 }
 
 object AndroidSdk {
