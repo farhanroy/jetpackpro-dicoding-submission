@@ -42,6 +42,10 @@ dependencies {
     implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)
 
+    // Coroutine
+    implementation(Libraries.coroutineCore)
+    implementation(Libraries.coroutineAndroid)
+
     // Dagger
     implementation(Libraries.hiltAndroid)
     kapt(Libraries.hiltAndroidCompiler)
