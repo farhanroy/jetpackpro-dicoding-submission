@@ -15,7 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
         buildConfigField("String", "BASE_URL", App.BASE_URL)
+        buildConfigField("String", "API_KEY", App.API_KEY)
     }
 
     buildTypes {
@@ -50,7 +52,11 @@ dependencies {
     implementation(Libraries.hiltAndroid)
     kapt(Libraries.hiltAndroidCompiler)
 
-    //retrofit
+    // Room
+    implementation(Libraries.roomRuntime)
+    kapt(Libraries.roomCompiler)
+
+    // Retrofit
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitConverter)
     implementation(Libraries.loggingInterceptor)

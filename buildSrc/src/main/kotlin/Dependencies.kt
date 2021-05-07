@@ -22,8 +22,8 @@ object BuildPlugins {
 
 
 object App {
-    const val BASE_URL = "https://api.themoviedb.org/3/"
-    const val API_KEY = "b7b05feb9ff822bf88dbb160c0050c8e"
+    const val BASE_URL = "\"https://api.themoviedb.org/3/\""
+    const val API_KEY = "\"b7b05feb9ff822bf88dbb160c0050c8e\""
 }
 
 object AndroidSdk {
@@ -46,6 +46,7 @@ object Libraries {
         const val loggingInterceptor = "4.9.1"
         const val hiltVersion = "2.28-alpha"
         const val coroutine = "1.3.9"
+        const val room = "2.3.0"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -67,6 +68,9 @@ object Libraries {
 
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
+
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
 }
 
 object TestLibraries {
