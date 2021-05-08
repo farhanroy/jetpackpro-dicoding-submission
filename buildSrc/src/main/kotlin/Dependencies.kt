@@ -45,8 +45,10 @@ object Libraries {
         const val retrofit = "2.9.0"
         const val loggingInterceptor = "4.9.1"
         const val hiltVersion = "2.28-alpha"
+        const val hiltViewModel = "1.0.0-alpha02"
         const val coroutine = "1.3.9"
         const val room = "2.3.0"
+        const val lifecycle = "2.3.1"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -55,6 +57,9 @@ object Libraries {
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val androidLegacy = "androidx.legacy:legacy-support-v4:${Versions.androidLegacy}"
+
+    const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
@@ -68,9 +73,12 @@ object Libraries {
 
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
+    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModel}"
+    const val hiltCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltViewModel}"
 
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 }
 
 object TestLibraries {

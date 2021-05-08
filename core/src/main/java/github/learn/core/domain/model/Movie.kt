@@ -1,13 +1,9 @@
 package github.learn.core.domain.model
 
-
 data class Movie(
     var backdropPath : String,
-    var firstAirDate : String,
-    var genreIds : List<Int>,
     var id : Int,
     var name : String,
-    var originCountry : List<String>,
     var originalLanguage : String,
     var originalName : String,
     var overview : String,

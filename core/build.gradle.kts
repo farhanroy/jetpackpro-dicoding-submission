@@ -48,18 +48,19 @@ dependencies {
     implementation(Libraries.coroutineCore)
     implementation(Libraries.coroutineAndroid)
 
-    // Dagger
+    // Hilt
     implementation(Libraries.hiltAndroid)
     kapt(Libraries.hiltAndroidCompiler)
 
     // Room
     implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
     kapt(Libraries.roomCompiler)
 
     // Retrofit
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitConverter)
-    implementation(Libraries.loggingInterceptor)
+    api(Libraries.loggingInterceptor)
 
     testImplementation (TestLibraries.junit4)
     androidTestImplementation (TestLibraries.testRunner)

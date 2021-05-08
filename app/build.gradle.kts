@@ -53,13 +53,25 @@ dependencies {
     implementation(Libraries.constraintLayout)
     implementation(Libraries.androidLegacy)
 
+    // Lifecycle
+    implementation(Libraries.lifecycle)
+    implementation(Libraries.viewModel)
+
+    // Room
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomKtx)
+    kapt(Libraries.roomCompiler)
+
     // Navigation
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUI)
 
-    // Dagger
+    // Hilt
     implementation(Libraries.hiltAndroid)
     kapt(Libraries.hiltAndroidCompiler)
+
+    implementation(Libraries.hiltViewModel)
+    kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.testRunner)

@@ -15,17 +15,8 @@ data class MovieEntity (
     @ColumnInfo(name= "backdrop_path")
     var backdropPath : String,
 
-    @ColumnInfo(name= "first_air_date")
-    var firstAirDate : String,
-
-    @ColumnInfo(name= "genre_ids")
-    var genreIds : List<Int>,
-
     @ColumnInfo(name= "name")
     var name : String,
-
-    @ColumnInfo(name= "origin_country")
-    var originCountry : List<String>,
 
     @ColumnInfo(name= "original_language")
     var originalLanguage : String,
