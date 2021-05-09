@@ -3,7 +3,7 @@ package github.learn.core.data.source.remote
 import android.util.Log
 import github.learn.core.data.source.remote.network.ApiResponse
 import github.learn.core.data.source.remote.network.ApiService
-import github.learn.core.data.source.remote.response.Results
+import github.learn.core.data.source.remote.response.MovieItemResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-    suspend fun getTrendingMovie(): Flow<ApiResponse<List<Results>>> {
+    suspend fun getTrendingMovie(): Flow<ApiResponse<List<MovieItemResponse>>> {
         return flow {
             try {
                 val response = apiService.getTrendingMovie()

@@ -3,7 +3,7 @@ package github.learn.core.data
 import github.learn.core.data.source.local.LocalDataSource
 import github.learn.core.data.source.remote.RemoteDataSource
 import github.learn.core.data.source.remote.network.ApiResponse
-import github.learn.core.data.source.remote.response.Results
+import github.learn.core.data.source.remote.response.MovieItemResponse
 import github.learn.core.domain.model.Movie
 import github.learn.core.domain.repository.IMovieRepository
 import github.learn.core.utils.DataMapper
@@ -18,7 +18,7 @@ class MovieRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ): IMovieRepository {
     override fun getTrendingMovie(): Flow<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<Results>>() {
+        object : NetworkBoundResource<List<Movie>, List<MovieItemResponse>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
                 return localDataSource.getAllMovie().map {
                     DataMapper.mapEntitiesToDomain(it)
@@ -29,10 +29,10 @@ class MovieRepository @Inject constructor(
                 //data == null || data.isEmpty()
                 true // ganti dengan true jika ingin selalu mengambil data dari internet
 
-            override suspend fun createCall(): Flow<ApiResponse<List<Results>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<MovieItemResponse>>> =
                 remoteDataSource.getTrendingMovie()
 
-            override suspend fun saveCallResult(data: List<Results>) {
+            override suspend fun saveCallResult(data: List<MovieItemResponse>) {
                 val tourismList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertMovie(tourismList)
             }

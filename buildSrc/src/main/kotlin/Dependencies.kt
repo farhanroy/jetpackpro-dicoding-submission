@@ -13,7 +13,6 @@ object BuildPlugins {
 
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
-    const val dynamicFeatureModule = "com.android.dynamic-feature"
     const val kotlinAndroid = "kotlin-android"
     const val kotlinKapt = "kapt"
     const val daggerHilt = "dagger.hilt.android.plugin"
@@ -89,7 +88,6 @@ object TestLibraries {
         const val espresso = "3.3.0"
     }
     const val junit4 = "junit:junit:${Versions.junit4}"
-    const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 }
