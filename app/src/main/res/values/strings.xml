@@ -4,4 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_home">Home</string>
     <string name="title_splash">Splash</string>
+    <string name="poster">poster</string>
+    <string name="something_wrong">Something wrong</string>
+    <string name="title_detail">Title</string>
+    <string name="_0_0">0.0</string>
+    <string name="release_date_detail">Release Date</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv">TV</string>
+    <string name="try_again">Try Again</string>
 </resources>

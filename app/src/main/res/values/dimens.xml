@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Margin-->
+    <dimen name="margin_content_super_small">4dp</dimen>
+    <dimen name="margin_content_very_small">6dp</dimen>
+    <dimen name="margin_content_medium_small">8dp</dimen>
+    <dimen name="margin_content_small">10dp</dimen>
+    <dimen name="margin_content_medium">16dp</dimen>
+    <dimen name="margin_plus_min">12dp</dimen>
+    <dimen name="margin_content_in">20dp</dimen>
+    <dimen name="margin_content">25dp</dimen>
+    <dimen name="margin_content_semi_large">30dp</dimen>
+    <dimen name="margin_content_medium_large">40dp</dimen>
+    <dimen name="margin_content_large">50dp</dimen>
+    <dimen name="margin_content_super_large">100dp</dimen>
+
+    <!-- FONT SIZE -->
+
+    <dimen name="font_super_small">6sp</dimen>
+    <dimen name="font_very_small">8sp</dimen>
+    <dimen name="font_small">10sp</dimen>
+    <dimen name="font_normal">12sp</dimen>
+    <dimen name="font_semi_large">14sp</dimen>
+    <dimen name="font_large">16sp</dimen>
+    <dimen name="font_super_large">18sp</dimen>
+    <dimen name="font_big">20sp</dimen>
+</resources>
