@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/trendingMovieFragment"
         android:name="github.learn.movie.ui.home.TrendingMovieFragment"
-        android:label="fragment_trending_movie"
+        android:label="Movie"
         tools:layout="@layout/fragment_trending_movie" />
     <fragment
         android:id="@+id/tvShowFragment"
         android:name="github.learn.movie.ui.home.TvShowFragment"
-        android:label="fragment_tv_show"
+        android:label="Tv Show"
         tools:layout="@layout/fragment_tv_show" />
 </navigation>

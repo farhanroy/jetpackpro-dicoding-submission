@@ -73,6 +73,10 @@ dependencies {
     implementation(Libraries.hiltViewModel)
     kapt(Libraries.hiltCompiler)
 
+    // Glide
+    implementation(Libraries.glide)
+    kapt(Libraries.glideCompiler)
+
     testImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.espresso)

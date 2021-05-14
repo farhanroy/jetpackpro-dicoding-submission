@@ -48,6 +48,7 @@ object Libraries {
         const val coroutine = "1.3.9"
         const val room = "2.3.0"
         const val lifecycle = "2.3.1"
+        const val glide = "4.12.0"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -78,6 +79,9 @@ object Libraries {
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 }
 
 object TestLibraries {

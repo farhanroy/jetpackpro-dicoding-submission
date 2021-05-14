@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import github.learn.core.domain.model.Movie
+import com.bumptech.glide.Glide
 import github.learn.movie.databinding.ItemMovieBinding
+import github.learn.movie.model.Movie
 
 class TrendingMovieAdapter : RecyclerView.Adapter<TrendingMovieViewHolder>() {
 
@@ -35,6 +36,7 @@ class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
 
     fun bind(item: Movie){
         binding.tvTitle.text = item.title
+        Glide.with(binding.ivPoster.context).load(item.imgPoster).into(binding.ivPoster)
     }
 
     companion object {

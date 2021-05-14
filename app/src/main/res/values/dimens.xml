@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="height_image_item_movie">250dp</dimen>
     <!--Margin-->
     <dimen name="margin_content_super_small">4dp</dimen>
     <dimen name="margin_content_very_small">6dp</dimen>

@@ -12,4 +12,5 @@
     <string name="title_movie">Movie</string>
     <string name="title_tv">TV</string>
     <string name="try_again">Try Again</string>
+    <string name="image_preview_darker">Image Preview Darker</string>
 </resources>
