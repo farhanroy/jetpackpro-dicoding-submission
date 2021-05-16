@@ -1,36 +1,22 @@
 package github.learn.movie.ui.home.viewmodel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import github.learn.core.data.Resource
-import github.learn.core.domain.model.Movie
-import github.learn.core.domain.usecase.MovieUseCase
-import github.learn.movie.utils.mock
-import org.junit.Rule
-import org.junit.Test
 import junit.framework.TestCase.assertNotNull
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
-import org.mockito.Mock
-import org.mockito.Mockito.verify
+import org.junit.Before
+import org.junit.Test
 
 class TrendingMovieViewModelTest {
-    @Rule
-    @JvmField
-    val rule = InstantTaskExecutorRule()
+    private lateinit var viewModel: TrendingMovieViewModel
 
-    @Mock
-    private lateinit var observer: Observer<Resource<List<Movie>>>
-
-    private val movieUseCases = mock<MovieUseCase>()
-
-    private val viewModel by lazy { TrendingMovieViewModel(movieUseCases) }
+    @Before
+    fun setUp() {
+        viewModel = TrendingMovieViewModel()
+    }
 
     @Test
-    fun getListMovie()  = runBlocking {
-
-        viewModel.movie.observeForever(observer)
-        verify(observer).onChanged(Resource.Loading())
-
+    fun getListMovie() {
+        val movie = viewModel.getTrendingMovie()
+        assertNotNull(movie)
+        assertEquals(10, movie.size)
     }
 }
