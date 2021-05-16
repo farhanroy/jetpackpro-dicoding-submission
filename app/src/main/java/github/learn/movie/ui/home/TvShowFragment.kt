@@ -1,17 +1,26 @@
 package github.learn.movie.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
 import github.learn.movie.databinding.FragmentTvShowBinding
+import github.learn.movie.model.TV
+import github.learn.movie.ui.detail.DetailTvActivity
+import github.learn.movie.ui.home.adapter.TvShowAdapter
+import github.learn.movie.ui.home.viewmodel.TvShowViewModel
+import github.learn.movie.utils.GridSpacingItemDecoration
 
 @AndroidEntryPoint
 class TvShowFragment : Fragment() {
 
+    private val viewModel: TvShowViewModel by viewModels()
+    private lateinit var adapter: TvShowAdapter
+    
     private var _binding: FragmentTvShowBinding? = null
     private val binding get() = _binding!!
 
@@ -23,8 +32,25 @@ class TvShowFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val tv = viewModel.getTvShow()
+        initRecycler(tv)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initRecycler(tv: List<TV>) {
+        adapter = TvShowAdapter {
+            requireActivity().startActivity(DetailTvActivity.newIntent(requireActivity(), it))
+        }
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.margin_content_very_small)
+        binding.rvTv.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true, 0))
+        binding.rvTv.adapter = adapter
+        adapter.submitData(tv)
     }
 }

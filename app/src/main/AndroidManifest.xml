@@ -12,10 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELearning">
-        <activity android:name=".ui.detail.DetailActivity"/>
-        <activity android:name=".ui.home.HomeActivity" />
         <activity
-            android:name=".ui.splash.SplashActivity">
+            android:name=".ui.detail.DetailTvActivity"
+            android:theme="@style/Theme.ActionBar"/>
+        <activity
+            android:name=".ui.detail.DetailMovieActivity"
+            android:theme="@style/Theme.ActionBar" />
+        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

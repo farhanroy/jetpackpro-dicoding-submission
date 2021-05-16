@@ -16,6 +16,7 @@ object BuildPlugins {
     const val kotlinAndroid = "kotlin-android"
     const val kotlinKapt = "kapt"
     const val daggerHilt = "dagger.hilt.android.plugin"
+    const val androidExtension = "kotlin-android-extensions"
 
 }
 

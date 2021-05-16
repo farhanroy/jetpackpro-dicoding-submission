@@ -1,5 +1,9 @@
 package github.learn.movie.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
     var id: String,
     var title: String,
@@ -8,4 +12,4 @@ data class Movie(
     var releaseYear: String,
     var imgPoster: Int,
     var imgBackground: Int
-)
+): Parcelable

@@ -10,9 +10,9 @@
     <dimen name="margin_plus_min">12dp</dimen>
     <dimen name="margin_content_in">20dp</dimen>
     <dimen name="margin_content">25dp</dimen>
-    <dimen name="margin_content_semi_large">30dp</dimen>
-    <dimen name="margin_content_medium_large">40dp</dimen>
-    <dimen name="margin_content_large">50dp</dimen>
+    <dimen name="margin_content_semi_large">32dp</dimen>
+    <dimen name="margin_content_medium_large">48dp</dimen>
+    <dimen name="margin_content_large">64dp</dimen>
     <dimen name="margin_content_super_large">100dp</dimen>
 
     <!-- FONT SIZE -->

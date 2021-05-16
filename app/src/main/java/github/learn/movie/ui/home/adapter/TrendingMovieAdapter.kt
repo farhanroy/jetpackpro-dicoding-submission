@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import github.learn.movie.databinding.ItemMovieBinding
 import github.learn.movie.model.Movie
 
-class TrendingMovieAdapter : RecyclerView.Adapter<TrendingMovieViewHolder>() {
+class TrendingMovieAdapter(
+    private val onClickListener: (Movie) -> Unit
+) : RecyclerView.Adapter<TrendingMovieViewHolder>() {
 
     private var data = listOf<Movie>()
 
@@ -20,7 +22,7 @@ class TrendingMovieAdapter : RecyclerView.Adapter<TrendingMovieViewHolder>() {
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: TrendingMovieViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position]){ onClickListener(data[position]) }
     }
 
     fun submitData(newItems: List<Movie>) {
@@ -34,9 +36,11 @@ class TrendingMovieAdapter : RecyclerView.Adapter<TrendingMovieViewHolder>() {
 class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Movie){
+    fun bind(item: Movie, onItemClicked: (Int) -> Unit){
         binding.tvTitle.text = item.title
         Glide.with(binding.ivPoster.context).load(item.imgPoster).into(binding.ivPoster)
+
+        binding.root.setOnClickListener { onItemClicked(adapterPosition) }
     }
 
     companion object {

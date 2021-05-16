@@ -10,6 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
 import github.learn.movie.databinding.FragmentTrendingMovieBinding
 import github.learn.movie.model.Movie
+import github.learn.movie.ui.detail.DetailMovieActivity
 import github.learn.movie.ui.home.adapter.TrendingMovieAdapter
 import github.learn.movie.ui.home.viewmodel.TrendingMovieViewModel
 import github.learn.movie.utils.GridSpacingItemDecoration
@@ -19,7 +20,7 @@ import github.learn.movie.utils.GridSpacingItemDecoration
 class TrendingMovieFragment : Fragment() {
 
     private val viewModel: TrendingMovieViewModel by viewModels()
-    private val adapter = TrendingMovieAdapter()
+    private lateinit var adapter : TrendingMovieAdapter
 
     private var _binding: FragmentTrendingMovieBinding? = null
     private val binding get() = _binding!!
@@ -38,15 +39,18 @@ class TrendingMovieFragment : Fragment() {
         initRecycler(movies)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initRecycler(movies: List<Movie>) {
+        adapter = TrendingMovieAdapter { movie ->
+            requireActivity().startActivity(DetailMovieActivity.newIntent(requireActivity(), movie))
+        }
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.margin_content_very_small)
         binding.rvMovie.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true, 0))
         binding.rvMovie.adapter = adapter
         adapter.submitData(movies)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
