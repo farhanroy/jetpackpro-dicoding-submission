@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,14 +43,32 @@ class DetailMovieActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.share -> {
+                shareMovie()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
     }
 
     private fun initToolbar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = "Detail Movie"
+        }
     }
 
     private fun initData() {
@@ -63,5 +83,15 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.tvDescription.text = movie.description
         binding.tvRelease.text = movie.releaseYear
         Glide.with(this).load(movie.imgPoster).into(binding.ivPoster)
+    }
+
+    private fun shareMovie() {
+        val movieTitle = data?.title
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, movieTitle)
+            type = "text/plain"
+        }
+        startActivity(sendIntent)
     }
 }

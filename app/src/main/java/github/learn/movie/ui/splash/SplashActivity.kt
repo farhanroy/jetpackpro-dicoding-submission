@@ -22,9 +22,9 @@ class SplashActivity : AppCompatActivity() {
         toHome()
     }
 
-    override fun onPause() {
+    override fun onStop() {
+        super.onStop()
         activityScope.cancel()
-        super.onPause()
     }
 
     /*
