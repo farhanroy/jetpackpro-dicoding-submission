@@ -43,9 +43,6 @@ android {
 
 
 dependencies {
-
-    implementation(project(":core"))
-
     implementation(Libraries.kotlinStdLib)
 
     implementation(Libraries.appCompat)
@@ -61,9 +58,6 @@ dependencies {
     // Room
     implementation(Libraries.roomRuntime)
     implementation(Libraries.roomKtx)
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     kapt(Libraries.roomCompiler)
 
     // Navigation
