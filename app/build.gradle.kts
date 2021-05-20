@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -75,7 +75,14 @@ dependencies {
     implementation(Libraries.glide)
     kapt(Libraries.glideCompiler)
 
+    implementation(Libraries.testCore)
+
     testImplementation(TestLibraries.junit4)
+    androidTestImplementation(TestLibraries.extJunit)
     androidTestImplementation(TestLibraries.testRunner)
+    androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.espresso)
+    androidTestImplementation(TestLibraries.espressoContrib)
+
+    debugImplementation("androidx.fragment:fragment-testing:1.2.4")
 }

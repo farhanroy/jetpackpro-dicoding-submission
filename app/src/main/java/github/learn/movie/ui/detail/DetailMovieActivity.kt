@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
 import github.learn.movie.databinding.ActivityDetailMovieBinding
 import github.learn.movie.model.Movie
+import github.learn.movie.ui.detail.viewmodel.DetailMovieViewModel
 import github.learn.movie.utils.getParcel
 import github.learn.movie.utils.putParcel
 

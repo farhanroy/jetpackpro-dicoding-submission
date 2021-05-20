@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import github.learn.movie.R
 import github.learn.movie.databinding.ActivityDetailTvBinding
 import github.learn.movie.model.TV
+import github.learn.movie.ui.detail.viewmodel.DetailTvViewModel
 import github.learn.movie.utils.getParcel
 import github.learn.movie.utils.putParcel
 

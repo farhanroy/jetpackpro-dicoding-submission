@@ -50,6 +50,7 @@ object Libraries {
         const val room = "2.3.0"
         const val lifecycle = "2.3.1"
         const val glide = "4.12.0"
+        const val testCore = "1.3.0"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -83,16 +84,22 @@ object Libraries {
 
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+
+    const val testCore = "androidx.test:core:${Versions.testCore}"
 }
 
 object TestLibraries {
     private object Versions {
         const val junit4 = "4.13.2"
         const val testRunner = "1.4.0-alpha06"
+        const val testRules = "1.4.0-alpha06"
         const val extJunit = "1.1.2"
         const val espresso = "3.3.0"
     }
     const val junit4 = "junit:junit:${Versions.junit4}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
+    const val testRules = "androidx.test:rules:${Versions.testRules}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
+    const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
 }

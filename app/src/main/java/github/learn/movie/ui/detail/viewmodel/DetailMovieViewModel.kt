@@ -1,4 +1,4 @@
-package github.learn.movie.ui.detail
+package github.learn.movie.ui.detail.viewmodel
 
 import androidx.lifecycle.ViewModel
 import github.learn.movie.model.Movie
