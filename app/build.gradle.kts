@@ -18,6 +18,9 @@ android {
         versionName = "1.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", App.BASE_URL)
+        buildConfigField("String", "API_KEY", App.API_KEY)
     }
 
     buildTypes {
@@ -64,6 +67,15 @@ dependencies {
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUI)
 
+    // Coroutine
+    implementation(Libraries.coroutineCore)
+    implementation(Libraries.coroutineAndroid)
+
+    // Retrofit
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitConverter)
+    api(Libraries.loggingInterceptor)
+
     // Hilt
     implementation(Libraries.hiltAndroid)
     kapt(Libraries.hiltAndroidCompiler)
@@ -83,6 +95,4 @@ dependencies {
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.espresso)
     androidTestImplementation(TestLibraries.espressoContrib)
-
-    debugImplementation("androidx.fragment:fragment-testing:1.2.4")
 }
