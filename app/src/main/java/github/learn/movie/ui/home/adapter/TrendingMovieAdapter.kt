@@ -6,14 +6,14 @@ import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import github.learn.movie.data.source.local.entity.MovieEntity
 import github.learn.movie.databinding.ItemMovieBinding
-import github.learn.movie.model.Movie
 
 class TrendingMovieAdapter(
-    private val onClickListener: (Movie) -> Unit
+    private val onClickListener: (MovieEntity) -> Unit
 ) : RecyclerView.Adapter<TrendingMovieViewHolder>() {
 
-    private var data = listOf<Movie>()
+    private var data = listOf<MovieEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingMovieViewHolder {
         return TrendingMovieViewHolder.create(parent)
@@ -22,10 +22,10 @@ class TrendingMovieAdapter(
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: TrendingMovieViewHolder, position: Int) {
-        holder.bind(data[position]){ onClickListener(data[position]) }
+        holder.bind(data[position]) { onClickListener(data[position]) }
     }
 
-    fun submitData(newItems: List<Movie>) {
+    fun submitData(newItems: List<MovieEntity>) {
         val diffCallback = MovieDiffCallback(data, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         data = newItems
@@ -36,9 +36,9 @@ class TrendingMovieAdapter(
 class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Movie, onItemClicked: (Int) -> Unit){
+    fun bind(item: MovieEntity, onItemClicked: (Int) -> Unit) {
         binding.tvTitle.text = item.title
-        Glide.with(binding.ivPoster.context).load(item.imgPoster).into(binding.ivPoster)
+        Glide.with(binding.ivPoster.context).load(item.posterPath).into(binding.ivPoster)
 
         binding.root.setOnClickListener { onItemClicked(adapterPosition) }
     }
@@ -51,7 +51,10 @@ class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
     }
 }
 
-class MovieDiffCallback(private val oldList: List<Movie>, private val newList: List<Movie>) :
+class MovieDiffCallback(
+    private val oldList: List<MovieEntity>,
+    private val newList: List<MovieEntity>
+) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
     override fun getNewListSize(): Int = newList.size

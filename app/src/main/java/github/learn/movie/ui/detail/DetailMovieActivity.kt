@@ -10,8 +10,8 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
+import github.learn.movie.data.source.local.entity.MovieEntity
 import github.learn.movie.databinding.ActivityDetailMovieBinding
-import github.learn.movie.model.Movie
 import github.learn.movie.ui.detail.viewmodel.DetailMovieViewModel
 import github.learn.movie.utils.getParcel
 import github.learn.movie.utils.putParcel
@@ -23,10 +23,10 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private val viewModel: DetailMovieViewModel by viewModels()
 
-    private var data: Movie? = null
+    private var data: MovieEntity? = null
 
     companion object {
-        fun newIntent(context: Context, movie: Movie? = null): Intent {
+        fun newIntent(context: Context, movie: MovieEntity? = null): Intent {
             return Intent(context, DetailMovieActivity::class.java).apply {
                 putParcel(context.getString(R.string.extra_movie), movie)
             }
@@ -81,9 +81,9 @@ class DetailMovieActivity : AppCompatActivity() {
         val movie = viewModel.getMovie()
 
         binding.tvTitle.text = movie.title
-        binding.tvDescription.text = movie.description
-        binding.tvRelease.text = movie.releaseYear
-        Glide.with(this).load(movie.imgPoster).into(binding.ivPoster)
+        binding.tvDescription.text = movie.title
+        binding.tvRelease.text = movie.title
+        Glide.with(this).load(movie.posterPath).into(binding.ivPoster)
     }
 
     private fun shareMovie() {

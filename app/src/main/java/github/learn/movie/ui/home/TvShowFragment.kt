@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
+import github.learn.movie.data.source.local.entity.TvShowEntity
 import github.learn.movie.databinding.FragmentTvShowBinding
-import github.learn.movie.model.TV
 import github.learn.movie.ui.detail.DetailTvActivity
 import github.learn.movie.ui.home.adapter.TvShowAdapter
 import github.learn.movie.ui.home.viewmodel.TvShowViewModel
@@ -44,7 +44,7 @@ class TvShowFragment : Fragment() {
         _binding = null
     }
 
-    private fun initRecycler(tv: List<TV>) {
+    private fun initRecycler(tv: List<TvShowEntity>) {
         adapter = TvShowAdapter {
             requireActivity().startActivity(DetailTvActivity.newIntent(requireActivity(), it))
         }

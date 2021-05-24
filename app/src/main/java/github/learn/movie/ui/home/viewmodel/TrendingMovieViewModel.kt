@@ -1,9 +1,11 @@
 package github.learn.movie.ui.home.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import github.learn.movie.model.Movie
-import github.learn.movie.utils.DataDummy
+import github.learn.movie.data.MovieCatalogRepository
 
-class TrendingMovieViewModel: ViewModel() {
-    fun getTrendingMovie() : List<Movie> = DataDummy.generateDummyMovies()
+class TrendingMovieViewModel @ViewModelInject constructor(
+    private val repository: MovieCatalogRepository
+): ViewModel() {
+    fun getTrendingMovie() = repository.getMovies()
 }

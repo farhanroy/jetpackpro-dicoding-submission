@@ -88,6 +88,7 @@ dependencies {
     kapt(Libraries.glideCompiler)
 
     implementation(Libraries.testCore)
+    implementation("androidx.test.espresso:espresso-idling-resource:3.1.0")
 
     testImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.extJunit)

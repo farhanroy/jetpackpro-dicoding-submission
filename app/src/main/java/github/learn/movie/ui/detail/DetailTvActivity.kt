@@ -9,8 +9,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import github.learn.movie.R
+import github.learn.movie.data.source.local.entity.TvShowEntity
 import github.learn.movie.databinding.ActivityDetailTvBinding
-import github.learn.movie.model.TV
 import github.learn.movie.ui.detail.viewmodel.DetailTvViewModel
 import github.learn.movie.utils.getParcel
 import github.learn.movie.utils.putParcel
@@ -21,10 +21,10 @@ class DetailTvActivity : AppCompatActivity() {
 
     private val viewModel: DetailTvViewModel by viewModels()
 
-    private var data: TV? = null
+    private var data: TvShowEntity? = null
 
     companion object {
-        fun newIntent(context: Context, tv: TV? = null): Intent {
+        fun newIntent(context: Context, tv: TvShowEntity? = null): Intent {
             return Intent(context, DetailTvActivity::class.java).apply {
                 putParcel(context.getString(R.string.extra_tv), tv)
             }
@@ -75,16 +75,16 @@ class DetailTvActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val movie = viewModel.getTv()
+        val tvShow = viewModel.getTv()
 
-        binding.tvTitle.text = movie.title
-        binding.tvDescription.text = movie.description
-        binding.tvRelease.text = movie.releaseYear
-        Glide.with(this).load(movie.imgPoster).into(binding.ivPoster)
+        binding.tvTitle.text = tvShow.name
+        binding.tvDescription.text = tvShow.name
+        binding.tvRelease.text = tvShow.name
+        Glide.with(this).load(tvShow.posterPath).into(binding.ivPoster)
     }
 
     private fun shareTv() {
-        val tvTitle = data?.title
+        val tvTitle = data?.name
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, tvTitle)
