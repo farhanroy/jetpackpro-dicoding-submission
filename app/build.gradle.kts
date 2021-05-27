@@ -61,6 +61,7 @@ dependencies {
     // Room
     implementation(Libraries.roomRuntime)
     implementation(Libraries.roomKtx)
+    implementation("androidx.palette:palette-ktx:1.0.0")
     kapt(Libraries.roomCompiler)
 
     // Navigation

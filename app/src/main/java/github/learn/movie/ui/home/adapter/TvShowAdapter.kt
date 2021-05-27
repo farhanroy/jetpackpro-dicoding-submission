@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import github.learn.movie.data.source.local.entity.TvShowEntity
 import github.learn.movie.databinding.ItemTvBinding
+import github.learn.movie.utils.Constants
 
-class TvShowAdapter (
+class TvShowAdapter(
     private val onClickListener: (TvShowEntity) -> Unit
 ) : RecyclerView.Adapter<TvShowViewHolder>() {
 
@@ -22,7 +23,7 @@ class TvShowAdapter (
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        holder.bind(data[position]){ onClickListener(data[position]) }
+        holder.bind(data[position]) { onClickListener(data[position]) }
     }
 
     fun submitData(newItems: List<TvShowEntity>) {
@@ -36,9 +37,12 @@ class TvShowAdapter (
 class TvShowViewHolder(private val binding: ItemTvBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: TvShowEntity, onItemClicked: (Int) -> Unit){
+    fun bind(item: TvShowEntity, onItemClicked: (Int) -> Unit) {
         binding.tvTitle.text = item.name
-        Glide.with(binding.ivPoster.context).load(item.posterPath).into(binding.ivPoster)
+        Glide
+            .with(binding.ivPoster.context)
+            .load("${Constants.IMAGE_URL}${item.posterPath}")
+            .into(binding.ivPoster)
         binding.root.setOnClickListener { onItemClicked(adapterPosition) }
     }
 
@@ -50,7 +54,10 @@ class TvShowViewHolder(private val binding: ItemTvBinding) :
     }
 }
 
-class TvDiffCallback(private val oldList: List<TvShowEntity>, private val newList: List<TvShowEntity>) :
+class TvDiffCallback(
+    private val oldList: List<TvShowEntity>,
+    private val newList: List<TvShowEntity>
+) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
     override fun getNewListSize(): Int = newList.size

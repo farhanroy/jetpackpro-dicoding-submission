@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import github.learn.movie.data.source.local.entity.MovieEntity
 import github.learn.movie.databinding.ItemMovieBinding
+import github.learn.movie.utils.Constants
 
 class TrendingMovieAdapter(
     private val onClickListener: (MovieEntity) -> Unit
@@ -38,8 +39,10 @@ class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
 
     fun bind(item: MovieEntity, onItemClicked: (Int) -> Unit) {
         binding.tvTitle.text = item.title
-        Glide.with(binding.ivPoster.context).load(item.posterPath).into(binding.ivPoster)
-
+        Glide
+            .with(binding.ivPoster.context)
+            .load("${Constants.IMAGE_URL}${item.posterPath}")
+            .into(binding.ivPoster)
         binding.root.setOnClickListener { onItemClicked(adapterPosition) }
     }
 

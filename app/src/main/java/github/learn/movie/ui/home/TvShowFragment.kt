@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
 import github.learn.movie.data.source.local.entity.TvShowEntity
@@ -35,14 +36,20 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tv = viewModel.getTvShow()
-        initRecycler(tv)
+        observeLiveData()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun observeLiveData() {
+        viewModel.getTvShow().observe(viewLifecycleOwner) { tv ->
+            initRecycler(tv)
+        }
+    }
+
 
     private fun initRecycler(tv: List<TvShowEntity>) {
         adapter = TvShowAdapter {

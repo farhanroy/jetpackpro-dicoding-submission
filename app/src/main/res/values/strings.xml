@@ -16,4 +16,9 @@
     <string name="extra_movie">Extra Movie</string>
     <string name="extra_tv">extra tv</string>
     <string name="share">Share</string>
+    <string name="image_backdrop">Image Backdrop</string>
+    <string name="genre_duration">Genre Duration</string>
+    <string name="overview">Overview</string>
+    <string name="overview_detail">Overview detail</string>
+    <string name="genre_duration_text">Genre Duration</string>
 </resources>
