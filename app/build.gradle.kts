@@ -92,6 +92,10 @@ dependencies {
     implementation("androidx.test.espresso:espresso-idling-resource:3.1.0")
 
     testImplementation(TestLibraries.junit4)
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.mockito:mockito-core:3.6.0")
+    testImplementation ("org.mockito:mockito-inline:3.6.0")
+    testImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     androidTestImplementation(TestLibraries.extJunit)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.testRules)
