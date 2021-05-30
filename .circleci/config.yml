@@ -1,29 +1,14 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/android:api-30 #confirm the latest docker image :)
-    environment:
-      JVM_OPTS: -Xmx3200m
-    steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-          command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_test_results:
-          path: app/build/test-results
+# .circleci/config.yaml
+version: 2.1 # to enable orb usage, you must be using circleci 2.1
+# Declare the orbs you wish to use.
+# Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
+orbs:
+  android: circleci/android@1.0
+workflows:
+  test:
+    jobs:
+      # This job uses the Android machine image by default
+      - android/run-ui-tests:
+          # Use pre-steps and post-steps if necessary
+          # to execute custom steps before and afer any of the built-in steps
+          system-image: system-images;android-29;default;x86
