@@ -19,37 +19,37 @@ object DataDummy {
     fun getMovies(): List<MovieEntity> {
         return listOf(
             MovieEntity(
-                691179,
-                "Friends: The Reunion",
-                "/bT3c4TSOP8vBmMoXZRDPTII6eDa.jpg",
-                8.3
+                id = 632357,
+                posterPath = "/4ryVgyGJzdBq8ejVIB0snxBqnyM.jpg",
+                title = "The Unholy",
+                voteAverage = 7.2
             ),
             MovieEntity(
-                637649,
-                "Wrath of Man",
-                "/YxopfHpsCV1oF8CZaL4M3Eodqa.jpg",
-                7.9
+                id = 503736,
+                posterPath = "/z8CExJekGrEThbpMXAmCFvvgoJR.jpg",
+                title = "Army of the Dead",
+                voteAverage = 6.6
             ),
             MovieEntity(
-                503736,
-                "Army of the Dead",
-                "/z8CExJekGrEThbpMXAmCFvvgoJR.jpg",
-                6.7
+                id = 823855,
+                posterPath = "/m6bUeV4mczG3z2YXXr5XDKPsQzv.jpg",
+                title = "I Am All Girls",
+                voteAverage = 7.0
             )
         )
     }
 
     fun getDetailMovie(): DetailEntity {
         return DetailEntity(
-            "/sF19W36JtRIhAm3VciggSkzBtt.jpg",
-            listOf("Comedy", "Documentary", "TV Movie"),
-            691179,
-            "The cast of Friends reunites for a once-in-a-lifetime celebration of the hit series, an unforgettable evening filled with iconic memories, uncontrollable laughter, happy tears, and special guests.",
-            "/bT3c4TSOP8vBmMoXZRDPTII6eDa.jpg",
-            "2021-05-27",
-            104,
-            "Friends: The Reunion",
-            8.3
+            backdropPath = "/wwFBRyekDcKXJwP0mImRJjAnudL.jpg",
+            genres = listOf("Horror"),
+            id = 632357,
+            overview = "Alice, a young hearing-impaired girl who, after a supposed visitation from the Virgin Mary, is inexplicably able to hear, speak and heal the sick. As word spreads and people from near and far flock to witness her miracles, a disgraced journalist hoping to revive his career visits the small New England town to investigate. When terrifying events begin to happen all around, he starts to question if these phenomena are the works of the Virgin Mary or something much more sinister.",
+            posterPath = "/4ryVgyGJzdBq8ejVIB0snxBqnyM.jpg",
+            releaseDate = "2021-03-31",
+            runtime = 99,
+            title = "The Unholy",
+            voteAverage = 7.2
         )
     }
 
@@ -95,35 +95,19 @@ object DataDummy {
         return listOf(
             Movie(
                 adult = false,
-                backdropPath = "/sF19W36JtRIhAm3VciggSkzBtt.jpg",
-                genreIds = listOf(35, 99, 10770),
-                id = 691179,
+                backdropPath = "/wwFBRyekDcKXJwP0mImRJjAnudL.jpg",
+                genreIds = listOf(27),
+                id = 632357,
                 originalLanguage = "en",
-                originalTitle = "Friends: The Reunion",
-                overview = "The cast of Friends reunites for a once-in-a-lifetime celebration of the hit series, an unforgettable evening filled with iconic memories, uncontrollable laughter, happy tears, and special guests.",
-                popularity = 155.168,
-                posterPath = "/bT3c4TSOP8vBmMoXZRDPTII6eDa.jpg",
-                releaseDate = "2021-05-27",
-                title = "Friends: The Reunion",
+                originalTitle = "The Unholy",
+                overview = "Alice, a young hearing-impaired girl who, after a supposed visitation from the Virgin Mary, is inexplicably able to hear, speak and heal the sick. As word spreads and people from near and far flock to witness her miracles, a disgraced journalist hoping to revive his career visits the small New England town to investigate. When terrifying events begin to happen all around, he starts to question if these phenomena are the works of the Virgin Mary or something much more sinister.",
+                popularity = 5972.409,
+                posterPath = "/4ryVgyGJzdBq8ejVIB0snxBqnyM.jpg",
+                releaseDate = "2021-03-31",
+                title = "The Unholy",
                 video = false,
-                voteAverage = 8.3,
-                voteCount = 64
-            ),
-            Movie(
-                adult = false,
-                backdropPath = "/70AV2Xx5FQYj20labp0EGdbjI6E.jpg",
-                genreIds = listOf(28, 30),
-                id = 637649,
-                originalLanguage = "en",
-                originalTitle = "Wrath of Man",
-                overview = "A cold and mysterious new security guard for a Los Angeles cash truck company surprises his co-workers when he unleashes precision skills during a heist. The crew is left wondering who he is and where he came from. Soon, the marksman's ultimate motive becomes clear as he takes dramatic and irrevocable steps to settle a score.",
-                popularity = 459.024,
-                posterPath = "/YxopfHpsCV1oF8CZaL4M3Eodqa.jpg",
-                releaseDate = "2021-04-22",
-                title = "Wrath of Man",
-                video = false,
-                voteAverage = 7.9,
-                voteCount = 257
+                voteAverage = 7.2,
+                voteCount = 596
             ),
             Movie(
                 adult = false,
@@ -133,13 +117,29 @@ object DataDummy {
                 originalLanguage = "en",
                 originalTitle = "Army of the Dead",
                 overview = "Following a zombie outbreak in Las Vegas, a group of mercenaries take the ultimate gamble: venturing into the quarantine zone to pull off the greatest heist ever attempted.",
-                popularity = 2362.737,
+                popularity = 3995.794,
                 posterPath = "/z8CExJekGrEThbpMXAmCFvvgoJR.jpg",
                 releaseDate = "2021-05-14",
                 title = "Army of the Dead",
                 video = false,
-                voteAverage = 6.7,
-                voteCount = 960
+                voteAverage = 6.6,
+                voteCount = 1078
+            ),
+            Movie(
+                adult = false,
+                backdropPath = "/yyWNPhP1HR4BTLErHcZwIUsMBvA.jpg",
+                genreIds = listOf(80, 18, 9648, 53),
+                id = 823855,
+                originalLanguage = "en",
+                originalTitle = "I Am All Girls",
+                overview = "A special crimes investigator forms an unlikely bond with a serial killer to bring down a global child sex trafficking syndicate.",
+                popularity = 2302.854,
+                posterPath = "/m6bUeV4mczG3z2YXXr5XDKPsQzv.jpg",
+                releaseDate = "2021-05-14",
+                title = "I Am All Girls",
+                video = false,
+                voteAverage = 7.0,
+                voteCount = 81
             )
         )
     }
@@ -147,43 +147,47 @@ object DataDummy {
     fun getRemoteDetailMovie(): MovieDetailResponse {
         return MovieDetailResponse(
             adult = false,
-            backdropPath = "/sF19W36JtRIhAm3VciggSkzBtt.jpg",
+            backdropPath = "/wwFBRyekDcKXJwP0mImRJjAnudL.jpg",
             belongsToCollection = null,
-            budget = 0,
+            budget = 10000000,
             genres = listOf(
                 Genre(
-                    id = 35,
-                    name = "Comedy"
-                ),
-                Genre(
-                    id = 99,
-                    name = "Documentary"
-                ),
-                Genre(
-                    id = 10770,
-                    name = "TV Movie"
+                    id = 27,
+                    name = "Horror"
                 )
             ),
-            homepage = "https://play.hbomax.com/page/urn:hbo:page:GYJxCDACcN8PDewEAAAAG:type:feature",
-            id = 691179,
-            imdbId = "tt11337862",
+            homepage = "https://www.sonypictures.com/movies/theunholy",
+            id = 632357,
+            imdbId = "tt9419056",
             originalLanguage = "en",
-            originalTitle = "Friends: The Reunion",
-            overview = "The cast of Friends reunites for a once-in-a-lifetime celebration of the hit series, an unforgettable evening filled with iconic memories, uncontrollable laughter, happy tears, and special guests.",
-            popularity = 110.834,
-            posterPath = "/l00ff9dmop1UBfb4QNrLMQl5fgc.jpg",
+            originalTitle = "The Unholy",
+            overview = "Alice, a young hearing-impaired girl who, after a supposed visitation from the Virgin Mary, is inexplicably able to hear, speak and heal the sick. As word spreads and people from near and far flock to witness her miracles, a disgraced journalist hoping to revive his career visits the small New England town to investigate. When terrifying events begin to happen all around, he starts to question if these phenomena are the works of the Virgin Mary or something much more sinister.",
+            popularity = 5154.321,
+            posterPath = "/4ryVgyGJzdBq8ejVIB0snxBqnyM.jpg",
             productionCompanies = listOf(
                 ProductionCompany(
-                    id = 1957,
-                    logoPath = "/3T19XSr6yqaLNK8uJWFImPgRax0.png",
-                    name = "Warner Bros. Television",
+                    id = 768,
+                    logoPath = null,
+                    name = "Ghost House Pictures",
                     originCountry = "US"
                 ),
                 ProductionCompany(
-                    id = 31810,
-                    logoPath = null,
-                    name = "Bright/Kauffman/Crane Productions",
+                    id = 3287,
+                    logoPath = "/bz6GbCQQXGNE56LTW9dwgksW0Iw.png",
+                    name = "Screen Gems",
                     originCountry = "US"
+                ),
+                ProductionCompany(
+                    id = 34,
+                    logoPath = "/GagSvqWlyPdkFHMfQ3pNq6ix9P.png",
+                    name = "Sony Pictures",
+                    originCountry = "US"
+                ),
+                ProductionCompany(
+                    id = 6951,
+                    logoPath = null,
+                    name = "Chapman/Leonard Studio Equipment",
+                    originCountry = ""
                 )
             ),
             productionCountries = listOf(
@@ -192,9 +196,9 @@ object DataDummy {
                     name = "United States of America"
                 )
             ),
-            releaseDate = "2021-05-27",
-            revenue = 0,
-            runtime = 104,
+            releaseDate = "2021-03-31",
+            revenue = 29082988,
+            runtime = 99,
             spokenLanguages = listOf(
                 SpokenLanguage(
                     englishName = "English",
@@ -203,12 +207,11 @@ object DataDummy {
                 )
             ),
             status = "Released",
-            tagline = "The One Where They Get Back Together.",
-            title = "Friends: The Reunion",
+            tagline = "Be careful who you pray to.",
+            title = "The Unholy",
             video = false,
-            voteAverage = 8.3,
-            voteCount = 59
-
+            voteAverage = 7.2,
+            voteCount = 592
         )
     }
 
