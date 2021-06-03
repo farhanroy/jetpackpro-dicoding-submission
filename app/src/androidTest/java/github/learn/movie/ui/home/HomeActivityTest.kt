@@ -45,15 +45,10 @@ class HomeActivityTest {
     fun loadDetailMovie() {
         onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.iv_detail)).check(matches(isDisplayed()))
-        onView(withId(R.id.iv_detail)).check(matches(withTagValue(equalTo(dummyDetailMovie.posterPath))))
         onView(withId(R.id.coordinator_layout)).perform(swipeUp())
         onView(withId(R.id.iv_backdrop)).check(matches(isDisplayed()))
-        onView(withId(R.id.iv_backdrop)).check(matches(withTagValue(equalTo(dummyDetailMovie.backdropPath))))
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-        onView(withId(R.id.collapsing)).check(matches(withContentDescription(dummyDetailMovie.title)))
-        onView(withId(R.id.tv_detail_genre_duration)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_overview)).check(matches(withText(dummyDetailMovie.overview)))
     }
 
     @Test
@@ -68,12 +63,9 @@ class HomeActivityTest {
         onView(withId(R.id.tvShowFragment)).perform(click())
         onView(withId(R.id.rv_tv)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.iv_detail)).check(matches(isDisplayed()))
-        onView(withId(R.id.iv_detail)).check(matches(withTagValue(equalTo(dummyDetailTvShow.posterPath))))
         onView(withId(R.id.coordinator_layout)).perform(swipeUp())
         onView(withId(R.id.iv_backdrop)).check(matches(isDisplayed()))
-        onView(withId(R.id.iv_backdrop)).check(matches(withTagValue(equalTo(dummyDetailTvShow.backdropPath))))
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-        onView(withId(R.id.collapsing)).check(matches(withContentDescription(dummyDetailTvShow.title)))
         onView(withId(R.id.tv_detail_overview)).check(matches(isDisplayed()))
     }
 }
