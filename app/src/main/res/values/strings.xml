@@ -25,4 +25,6 @@
     <string name="movie">Movie</string>
     <string name="tv_show">Tv Show</string>
     <string name="favorite">Favorite</string>
+    <string name="undo">undo</string>
+    <string name="ok">ok</string>
 </resources>

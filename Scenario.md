@@ -12,26 +12,23 @@
 - DetailMovieViewModelTest
     - Memuat data film:
         - memastikan data film tidak null
-        - memastikan dummy backdrop film sama dengan data backdrop film index ke 0
-        - memastikan dummy genre film sama dengan data genre film index ke 0
-        - memastikan dummy id film sama dengan data id film index ke 0
-        - memastikan dummy nama film sama dengan data nama film index ke 0
-        - memastikan dummy deskripsi film sama dengan data deskripsi film index ke 0
-        - memastikan dummy runtime film sama dengan data runtime film index ke 0
-        - memastikan dummy vote rata 2 film sama dengan data vote rata 2 film index ke 0
-        - memastikan dummy tanggal rilis film sama dengan data tanggal rilis film index ke 0
+        - memastikan observe film bekerja dengan baik
+        - memastikan data setFavorite bernilai true
 
 - DetailTvViewModelTest
     - Memuat data tv:
-        - memastikan data tv tidak null
-        - memastikan dummy backdrop tv sama dengan data backdrop tv index ke 0
-        - memastikan dummy genre tv sama dengan data genre tv index ke 0
-        - memastikan dummy id tv sama dengan data id tv index ke 0
-        - memastikan dummy nama tv sama dengan data nama tv index ke 0
-        - memastikan dummy deskripsi tv sama dengan data deskripsi tv index ke 0
-        - memastikan dummy runtime tv sama dengan data runtime tv index ke 0
-        - memastikan dummy vote rata 2 tv sama dengan data vote rata 2 tv index ke 0
-        - memastikan dummy tanggal rilis tv sama dengan data tanggal rilis tv index ke 0
+        - memastikan data TV tidak null
+        - memastikan observe TV bekerja dengan baik
+        - memastikan data setFavorite bernilai true
+
+
+- MovieFavoriteViewModelTest
+    - Set Favorite: Memastikan data setFavorite bernilai true
+    - Get Favorite: Memastikan data favorite bernilai 3 dan tidak null
+
+- MovieFavoriteViewModelTest
+    - Set Favorite: Memastikan data setFavorite bernilai true
+    - Get Favorite: Memastikan data favorite bernilai 3 dan tidak null
 
 
 Intrumented Test
@@ -59,6 +56,44 @@ Intrumented Test
             - cek apakah backdrop image tampil
             - cek apakah view collapsing tampil
             - cek textview overview tvShow apakah tampil
+
+    - Memuat list favorite movie
+            - perform click pada bottom nav dengan id movieFavoriteFragment
+            - cek apakah recycler view dari list movie tampil
+            - mencoba menggulirkan recycler view ke index terakhir
+
+    - Memuat list favorite tvShow
+            - perform click pada bottom nav dengan id tvShowFavoriteFragment
+            - cek apakah recycler view dari list tvShow tampil
+            - mencoba menggulirkan recycler view ke index terakhir
+
+    - Memuat detail movie favorite
+            - cek apakah recycler view dari list movie tampil
+            - klik pada index 0
+            - tekan floating action button untuk menambahkan favorite
+            - tekan kembali / press back
+            - perform click pada bottom nav dengan id favoriteFragment
+            - klik list pada index 0
+            - mengecek apakah poster image view tampil
+            - tekan floating action button untuk menghapus favorite
+            - scrolling coordinator layout
+            - cek apakah backdrop image tampil
+            - cek apakah view collapsing tampil
+            - cek textview overview movie apakah tampil
+
+    - Memuat detail tvShow favorite
+                - cek apakah recycler view dari list tvShow tampil
+                - klik pada index 0
+                - tekan floating action button untuk menambahkan favorite
+                - tekan kembali / press back
+                - perform click pada bottom nav dengan id favoriteFragment
+                - klik list pada index 0
+                - mengecek apakah poster image view tampil
+                - tekan floating action button untuk menghapus favorite
+                - scrolling coordinator layout
+                - cek apakah backdrop image tampil
+                - cek apakah view collapsing tampil
+                - cek textview overview movie apakah tampil
 
 
 
