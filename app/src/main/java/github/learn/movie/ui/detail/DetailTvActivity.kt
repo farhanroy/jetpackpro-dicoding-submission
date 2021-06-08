@@ -6,8 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
@@ -20,13 +19,11 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
-import github.learn.movie.data.source.local.entity.DetailEntity
 import github.learn.movie.data.source.local.entity.TvShowEntity
 import github.learn.movie.databinding.ActivityDetailTvBinding
 import github.learn.movie.ui.detail.viewmodel.DetailTvViewModel
 import github.learn.movie.utils.Constants
-import github.learn.movie.utils.getParcel
-import github.learn.movie.utils.putParcel
+import github.learn.movie.utils.Status
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -36,39 +33,42 @@ class DetailTvActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
 
     private val viewModel: DetailTvViewModel by viewModels()
 
-    private var data: TvShowEntity? = null
+    private var dataId: Int? = null
+
     private val percentageToShowImage = 20
     private var mMaxScrollSize = 0
     private var mIsImageHidden = false
 
     companion object {
-        fun newIntent(context: Context, tv: TvShowEntity? = null): Intent {
+        fun newIntent(context: Context, id: Int? = null): Intent {
             return Intent(context, DetailTvActivity::class.java).apply {
-                putParcel(context.getString(R.string.extra_tv), tv)
+                putExtra(context.getString(R.string.extra_tv), id)
             }
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTvBinding.inflate(layoutInflater)
+        dataId = intent.getIntExtra(this.getString(R.string.extra_tv), 0)
         setContentView(binding.root)
-        data = intent.getParcel(this.getString(R.string.extra_tv))
+
         supportActionBar?.hide()
 
-        showProgressBar(true)
+        initView()
 
-        initToolbar()
-
+        viewModel.setTvShow(dataId!!)
+        initState()
         observeLiveData()
     }
 
-    private fun initToolbar(){
+    private fun initView(){
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.share -> {
-                    shareTv()
+                    shareTvShow()
                     true
                 }
                 else -> super.onOptionsItemSelected(it)
@@ -76,21 +76,58 @@ class DetailTvActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
         }
 
         binding.appbar.addOnOffsetChangedListener(this)
-    }
 
-    private fun observeLiveData() {
-        viewModel.getTv((data?.id).toString()).observe(this) {
-            populateDataDetail(it)
+        binding.fabFavorite.setOnClickListener {
+            viewModel.setFavoriteTvShow()
         }
     }
 
-    private fun populateDataDetail(data: DetailEntity) {
-        val genre = data.genres.toString().replace("[", "").replace("]", "")
-        
+    private fun observeLiveData() {
+        viewModel.getDetailTvShow().observe(this) { detail ->
+            when (detail.status) {
+                Status.LOADING -> showProgressBar(true)
+                Status.SUCCESS -> {
+                    if (detail.data != null) {
+                        showProgressBar(false)
+                        populateDataDetail(detail.data)
+                    }
+                }
+                Status.ERROR -> {
+                    showProgressBar(false)
+                    Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
+    }
+
+    private fun initState() {
+        viewModel.getDetailTvShow().observe(this) { movie ->
+            when (movie.status) {
+                Status.LOADING -> showProgressBar(true)
+                Status.SUCCESS -> {
+                    if (movie.data != null) {
+                        showProgressBar(false)
+                        val state = movie.data.isFav
+                        setFavoriteState(state)
+                    }
+                }
+                Status.ERROR -> {
+                    showProgressBar(false)
+                    Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun populateDataDetail(data: TvShowEntity) {
+
         val genreDurationText = resources.getString(R.string.genre_duration_text)
 
         binding.tvDetailGenreDuration.text = genreDurationText
-        binding.collapsing.title = data.title
+        binding.collapsing.title = data.name
         binding.tvDetailOverview.text = data.overview
 
         Glide.with(this)
@@ -118,11 +155,11 @@ class DetailTvActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
     }
 
 
-    private fun shareTv() {
-        val tvTitle = data?.name
+    private fun shareTvShow() {
+        val movieTitle = dataId
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, tvTitle)
+            putExtra(Intent.EXTRA_TEXT, movieTitle)
             type = "text/plain"
         }
         startActivity(sendIntent)
@@ -132,7 +169,18 @@ class DetailTvActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListen
         binding.progressBar.isVisible = state
         binding.appbar.isInvisible = state
         binding.nestedScrollView.isInvisible = state
+        binding.fabFavorite.isInvisible = state
     }
+
+    private fun setFavoriteState(state: Boolean) {
+        val fab = binding.fabFavorite
+        if (state) {
+            fab.setImageResource(R.drawable.ic_favorite_white_24)
+        } else {
+            fab.setImageResource(R.drawable.ic_favorite_border_white_24)
+        }
+    }
+
 
 
     private fun setColorByPalette(poster: Bitmap) {

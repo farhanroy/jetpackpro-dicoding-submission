@@ -15,4 +15,9 @@
         android:name="github.learn.movie.ui.home.TvShowFragment"
         android:label="Tv Show"
         tools:layout="@layout/fragment_tv_show" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="github.learn.movie.ui.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

@@ -21,4 +21,8 @@
     <string name="overview">Overview</string>
     <string name="overview_detail">Overview detail</string>
     <string name="genre_duration_text">Genre Duration</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="movie">Movie</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="favorite">Favorite</string>
 </resources>

@@ -53,6 +53,8 @@ dependencies {
     implementation(Libraries.material)
     implementation(Libraries.constraintLayout)
     implementation(Libraries.androidLegacy)
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.palette:palette-ktx:1.0.0")
 
     // Lifecycle
     implementation(Libraries.lifecycle)
@@ -61,7 +63,6 @@ dependencies {
     // Room
     implementation(Libraries.roomRuntime)
     implementation(Libraries.roomKtx)
-    implementation("androidx.palette:palette-ktx:1.0.0")
     kapt(Libraries.roomCompiler)
 
     // Navigation
@@ -83,6 +84,9 @@ dependencies {
 
     implementation(Libraries.hiltViewModel)
     kapt(Libraries.hiltCompiler)
+
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:2.1.1")
 
     // Glide
     implementation(Libraries.glide)

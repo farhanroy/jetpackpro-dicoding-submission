@@ -7,8 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -20,13 +19,11 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import github.learn.movie.R
-import github.learn.movie.data.source.local.entity.DetailEntity
 import github.learn.movie.data.source.local.entity.MovieEntity
 import github.learn.movie.databinding.ActivityDetailMovieBinding
 import github.learn.movie.ui.detail.viewmodel.DetailMovieViewModel
 import github.learn.movie.utils.Constants
-import github.learn.movie.utils.getParcel
-import github.learn.movie.utils.putParcel
+import github.learn.movie.utils.Status
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -36,16 +33,16 @@ class DetailMovieActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
 
     private val viewModel: DetailMovieViewModel by viewModels()
 
-    private var data: MovieEntity? = null
+    private var dataId: Int? = null
 
     private val percentageToShowImage = 20
     private var mMaxScrollSize = 0
     private var mIsImageHidden = false
 
     companion object {
-        fun newIntent(context: Context, movie: MovieEntity? = null): Intent {
+        fun newIntent(context: Context, id: Int? = null): Intent {
             return Intent(context, DetailMovieActivity::class.java).apply {
-                putParcel(context.getString(R.string.extra_movie), movie)
+                putExtra(context.getString(R.string.extra_movie), id)
             }
         }
     }
@@ -54,18 +51,19 @@ class DetailMovieActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailMovieBinding.inflate(layoutInflater)
-        data = intent.getParcel(this.getString(R.string.extra_movie))
+        dataId = intent.getIntExtra(this.getString(R.string.extra_movie), 0)
         setContentView(binding.root)
 
         supportActionBar?.hide()
 
-        showProgressBar(true)
+        initView()
 
-        initToolbar()
+        viewModel.setFilm(dataId!!)
+        initState()
         observeLiveData()
     }
 
-    private fun initToolbar(){
+    private fun initView(){
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId){
@@ -78,15 +76,53 @@ class DetailMovieActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
         }
 
         binding.appbar.addOnOffsetChangedListener(this)
-    }
 
-    private fun observeLiveData() {
-        viewModel.getMovie((data?.id).toString()).observe(this) {
-            populateDataDetail(it)
+        binding.fabFavorite.setOnClickListener {
+            viewModel.setFavoriteMovie()
         }
     }
 
-    private fun populateDataDetail(data: DetailEntity) {
+    private fun observeLiveData() {
+        viewModel.getDetailMovie().observe(this) { detail ->
+            when (detail.status) {
+                Status.LOADING -> showProgressBar(true)
+                Status.SUCCESS -> {
+                    if (detail.data != null) {
+                        showProgressBar(false)
+                        populateDataDetail(detail.data)
+                    }
+                }
+                Status.ERROR -> {
+                    showProgressBar(false)
+                    Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
+    }
+
+    private fun initState() {
+        viewModel.getDetailMovie().observe(this) { movie ->
+            when (movie.status) {
+                Status.LOADING -> showProgressBar(true)
+                Status.SUCCESS -> {
+                    if (movie.data != null) {
+                        showProgressBar(false)
+                        val state = movie.data.isFav
+                        setFavoriteState(state)
+                    }
+                }
+                Status.ERROR -> {
+                    showProgressBar(false)
+                    Toast.makeText(applicationContext, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun populateDataDetail(data: MovieEntity) {
         val genre = data.genres.toString().replace("[", "").replace("]", "")
 
         val genreDurationText = resources.getString(R.string.genre_duration_text)
@@ -121,7 +157,7 @@ class DetailMovieActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
 
 
     private fun shareMovie() {
-        val movieTitle = data?.title
+        val movieTitle = dataId
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, movieTitle)
@@ -134,7 +170,18 @@ class DetailMovieActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLis
         binding.progressBar.isVisible = state
         binding.appbar.isInvisible = state
         binding.nestedScrollView.isInvisible = state
+        binding.fabFavorite.isInvisible = state
     }
+
+    private fun setFavoriteState(state: Boolean) {
+        val fab = binding.fabFavorite
+        if (state) {
+            fab.setImageResource(R.drawable.ic_favorite_white_24)
+        } else {
+            fab.setImageResource(R.drawable.ic_favorite_border_white_24)
+        }
+    }
+
 
 
     private fun setColorByPalette(poster: Bitmap) {

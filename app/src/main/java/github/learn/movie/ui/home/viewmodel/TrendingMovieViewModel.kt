@@ -7,5 +7,5 @@ import github.learn.movie.data.MovieCatalogRepository
 class TrendingMovieViewModel @ViewModelInject constructor(
     private val repository: MovieCatalogRepository
 ): ViewModel() {
-    fun getTrendingMovie() = repository.getMovies()
+    fun getTrendingMovie(sort: String) = repository.getMovies(sort)
 }

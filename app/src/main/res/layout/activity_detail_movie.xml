@@ -143,4 +143,17 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:elevation="8dp"
+        android:src="@drawable/ic_favorite_border_white_24"
+        android:contentDescription="@string/favorite"
+        app:layout_anchor="@id/card_detail"
+        app:layout_anchorGravity="top|right|end"
+        app:backgroundTint="@color/white"
+        tools:ignore="RtlHardcoded" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

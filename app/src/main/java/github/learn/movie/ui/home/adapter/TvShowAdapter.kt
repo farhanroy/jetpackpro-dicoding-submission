@@ -3,75 +3,63 @@ package github.learn.movie.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import github.learn.movie.data.source.local.entity.TvShowEntity
 import github.learn.movie.databinding.ItemTvBinding
 import github.learn.movie.utils.Constants
+import github.learn.movie.utils.Constants.IMAGE_URL
 
-class TvShowAdapter(
-    private val onClickListener: (TvShowEntity) -> Unit
-) : RecyclerView.Adapter<TvShowViewHolder>() {
-
-    private var data = listOf<TvShowEntity>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
-        return TvShowViewHolder.create(parent)
-    }
-
-    override fun getItemCount(): Int = data.size
-
-    override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        holder.bind(data[position]) { onClickListener(data[position]) }
-    }
-
-    fun submitData(newItems: List<TvShowEntity>) {
-        val diffCallback = TvDiffCallback(data, newItems)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        data = newItems
-        diffResult.dispatchUpdatesTo(this)
-    }
-}
-
-class TvShowViewHolder(private val binding: ItemTvBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(item: TvShowEntity, onItemClicked: (Int) -> Unit) {
-        binding.tvTitle.text = item.name
-        Glide
-            .with(binding.ivPoster.context)
-            .load("${Constants.IMAGE_URL}${item.posterPath}")
-            .into(binding.ivPoster)
-        binding.root.setOnClickListener { onItemClicked(adapterPosition) }
-    }
+class TvShowAdapter : PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        fun create(parent: ViewGroup): TvShowViewHolder {
-            val view = ItemTvBinding.inflate(LayoutInflater.from(parent.context))
-            return TvShowViewHolder(view)
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
         }
     }
-}
 
-class TvDiffCallback(
-    private val oldList: List<TvShowEntity>,
-    private val newList: List<TvShowEntity>
-) :
-    DiffUtil.Callback() {
-    override fun getOldListSize(): Int = oldList.size
-    override fun getNewListSize(): Int = newList.size
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition].id == newList[newItemPosition].id
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
-    override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean =
-        oldList[oldPosition].id == newList[newPosition].id
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
+        val itemMovieBinding = ItemTvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TvShowViewHolder(itemMovieBinding)
+    }
 
-    @Nullable
-    override fun getChangePayload(oldPosition: Int, newPosition: Int): Any? {
-        return super.getChangePayload(oldPosition, newPosition)
+    override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
+        val tvShow = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow)
+        }
+    }
+
+    inner class TvShowViewHolder(private val binding: ItemTvBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(tvShow: TvShowEntity) {
+            with(binding) {
+                tvTitle.text = tvShow.name
+
+                Glide.with(root.context)
+                    .asBitmap()
+                    .load(IMAGE_URL + tvShow.posterPath)
+                    .into(ivPoster)
+
+                itemView.setOnClickListener { onItemClickCallback.onItemClicked(tvShow.id.toString()) }
+            }
+        }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(id: String)
     }
 }
-
-

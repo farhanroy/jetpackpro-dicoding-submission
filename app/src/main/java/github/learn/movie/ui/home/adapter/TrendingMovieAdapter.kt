@@ -3,72 +3,62 @@ package github.learn.movie.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import github.learn.movie.data.source.local.entity.MovieEntity
 import github.learn.movie.databinding.ItemMovieBinding
 import github.learn.movie.utils.Constants
+import github.learn.movie.utils.Constants.IMAGE_URL
 
-class TrendingMovieAdapter(
-    private val onClickListener: (MovieEntity) -> Unit
-) : RecyclerView.Adapter<TrendingMovieViewHolder>() {
-
-    private var data = listOf<MovieEntity>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingMovieViewHolder {
-        return TrendingMovieViewHolder.create(parent)
-    }
-
-    override fun getItemCount(): Int = data.size
-
-    override fun onBindViewHolder(holder: TrendingMovieViewHolder, position: Int) {
-        holder.bind(data[position]) { onClickListener(data[position]) }
-    }
-
-    fun submitData(newItems: List<MovieEntity>) {
-        val diffCallback = MovieDiffCallback(data, newItems)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        data = newItems
-        diffResult.dispatchUpdatesTo(this)
-    }
-}
-
-class TrendingMovieViewHolder(private val binding: ItemMovieBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(item: MovieEntity, onItemClicked: (Int) -> Unit) {
-        binding.tvTitle.text = item.title
-        Glide
-            .with(binding.ivPoster.context)
-            .load("${Constants.IMAGE_URL}${item.posterPath}")
-            .into(binding.ivPoster)
-        binding.root.setOnClickListener { onItemClicked(adapterPosition) }
-    }
+class TrendingMovieAdapter : PagedListAdapter<MovieEntity, TrendingMovieAdapter.TrendingMovieViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        fun create(parent: ViewGroup): TrendingMovieViewHolder {
-            val view = ItemMovieBinding.inflate(LayoutInflater.from(parent.context))
-            return TrendingMovieViewHolder(view)
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem == newItem
+            }
         }
     }
-}
 
-class MovieDiffCallback(
-    private val oldList: List<MovieEntity>,
-    private val newList: List<MovieEntity>
-) :
-    DiffUtil.Callback() {
-    override fun getOldListSize(): Int = oldList.size
-    override fun getNewListSize(): Int = newList.size
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition].id == newList[newItemPosition].id
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
-    override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean =
-        oldList[oldPosition].id == newList[newPosition].id
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
-    @Nullable
-    override fun getChangePayload(oldPosition: Int, newPosition: Int): Any? {
-        return super.getChangePayload(oldPosition, newPosition)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingMovieViewHolder {
+        val itemMovieBinding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TrendingMovieViewHolder(itemMovieBinding)
+    }
+
+    override fun onBindViewHolder(holder: TrendingMovieViewHolder, position: Int) {
+        val movie = getItem(position)
+        if (movie != null) {
+            holder.bind(movie)
+        }
+    }
+
+    inner class TrendingMovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: MovieEntity) {
+            with(binding) {
+                tvTitle.text = movie.title
+
+                Glide.with(itemView.context)
+                    .load(IMAGE_URL + movie.posterPath)
+                    .into(ivPoster)
+
+                itemView.setOnClickListener { onItemClickCallback.onItemClicked(movie.id.toString()) }
+            }
+        }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(id: String)
     }
 }
