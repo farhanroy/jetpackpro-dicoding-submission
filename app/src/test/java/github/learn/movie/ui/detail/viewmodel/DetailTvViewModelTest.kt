@@ -51,6 +51,7 @@ class DetailTvViewModelTest {
 
         viewModel.setTvShow(dummyTvShowId)
         viewModel.getDetailTvShow().observeForever(tvShowObserver)
+        verify(movieCatalogRepository).getDetailTvShow(dummyTvShowId)
         verify(tvShowObserver).onChanged(dummyDetailTvShow)
     }
 

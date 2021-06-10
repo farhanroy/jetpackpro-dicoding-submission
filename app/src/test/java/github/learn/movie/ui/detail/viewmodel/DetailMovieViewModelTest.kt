@@ -51,6 +51,7 @@ class DetailMovieViewModelTest {
 
         viewModel.setFilm(dummyMovieId)
         viewModel.getDetailMovie().observeForever(movieObserver)
+        verify(movieCatalogRepository).getDetailMovie(dummyMovieId)
         verify(movieObserver).onChanged(dummyDetailMovie)
     }
 
